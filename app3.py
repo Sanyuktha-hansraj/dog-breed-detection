@@ -25,7 +25,7 @@ st.set_page_config(
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 NUM_CLASSES = 120
 MODEL_PATH = "efficientnet_dog_classifier_final.pth"
-DATASET_PATH = "Dataset\train"
+DATASET_PATH = "Dataset/test"
 
 # App state management
 if 'breed_info_loaded' not in st.session_state:
@@ -196,7 +196,7 @@ def display_predictions(predictions, inference_time=None, breed_info=None):
 
     # Display inference time if available
     if inference_time:
-        st.info(f"⏱️ Inference time: {inference_time * 1000:.2f}ms")
+        st.info(f"⏱ Inference time: {inference_time * 1000:.2f}ms")
 
     # Display confidence threshold selector
     confidence_threshold = st.slider(
@@ -214,9 +214,9 @@ def display_predictions(predictions, inference_time=None, breed_info=None):
     if filtered_predictions:
         for i, (breed, prob) in enumerate(filtered_predictions):
             # Progress bar for probability
-            st.markdown(f"**{i + 1}. {breed}**")
+            st.markdown(f"{i + 1}. {breed}")
             st.progress(float(prob))
-            st.markdown(f"Confidence: **{prob * 100:.2f}%**")
+            st.markdown(f"Confidence: *{prob * 100:.2f}%*")
 
             # Show breed info if available
             if breed_info and breed in breed_info:
@@ -228,11 +228,11 @@ def display_predictions(predictions, inference_time=None, breed_info=None):
                             st.image(breed_images[breed], use_column_width=True)
                     with col2:
                         st.markdown(f"### {breed}")
-                        st.markdown(f"**Description:** {breed_info[breed]['description']}")
-                        st.markdown(f"**Origin:** {breed_info[breed]['origin']}")
-                        st.markdown(f"**Temperament:** {breed_info[breed]['temperament']}")
-                        st.markdown(f"**Size:** {breed_info[breed]['height']} in height, {breed_info[breed]['weight']}")
-                        st.markdown(f"**Life Span:** {breed_info[breed]['life_span']}")
+                        st.markdown(f"*Description:* {breed_info[breed]['description']}")
+                        st.markdown(f"*Origin:* {breed_info[breed]['origin']}")
+                        st.markdown(f"*Temperament:* {breed_info[breed]['temperament']}")
+                        st.markdown(f"*Size:* {breed_info[breed]['height']} in height, {breed_info[breed]['weight']}")
+                        st.markdown(f"*Life Span:* {breed_info[breed]['life_span']}")
 
             st.markdown("---")
     else:
@@ -327,7 +327,7 @@ if menu == "Home":
         Simply upload a photo or take one with your camera!
 
         ### Features:
-        - 🖼️ Upload images from your device
+        - 🖼 Upload images from your device
         - 📸 Take photos using your webcam
         - 🔍 View all 120 dog breeds in our gallery
         - 📊 Get detailed breed information
@@ -337,7 +337,7 @@ if menu == "Home":
         # Quick access buttons
         col_a, col_b = st.columns(2)
         with col_a:
-            if st.button("🖼️ Upload Image", use_container_width=True):
+            if st.button("🖼 Upload Image", use_container_width=True):
                 st.session_state.menu = "Upload Image"
         with col_b:
             if st.button("📸 Take Photo", use_container_width=True):
@@ -529,12 +529,12 @@ elif menu == "View Breeds":
         with col2:
             if breed in breed_info:
                 info = breed_info[breed]
-                st.markdown(f"**Description:** {info['description']}")
-                st.markdown(f"**Origin:** {info['origin']}")
-                st.markdown(f"**Temperament:** {info['temperament']}")
-                st.markdown(f"**Height:** {info['height']}")
-                st.markdown(f"**Weight:** {info['weight']}")
-                st.markdown(f"**Life Span:** {info['life_span']}")
+                st.markdown(f"*Description:* {info['description']}")
+                st.markdown(f"*Origin:* {info['origin']}")
+                st.markdown(f"*Temperament:* {info['temperament']}")
+                st.markdown(f"*Height:* {info['height']}")
+                st.markdown(f"*Weight:* {info['weight']}")
+                st.markdown(f"*Life Span:* {info['life_span']}")
 
 elif menu == "Instructions":
     st.markdown("<h1 class='main-header'>How to Use This App</h1>", unsafe_allow_html=True)
@@ -573,17 +573,17 @@ elif menu == "Instructions":
     with tab2:
         st.markdown("### Using the App")
         st.markdown("""
-        1. **Upload an Image**:
+        1. *Upload an Image*:
            - Click "Upload Image" in the sidebar
            - Upload a dog photo from your device
            - Click "Identify Breed" to get results
 
-        2. **Take a Photo**:
+        2. *Take a Photo*:
            - Click "Take Photo" in the sidebar
            - Use your device's camera to take a picture
            - Click "Identify Breed" to get results
 
-        3. **Browse Breeds**:
+        3. *Browse Breeds*:
            - Click "View Breeds" to see all available dog breeds
            - Use the search box to find specific breeds
            - Click on any breed to view detailed information
@@ -604,7 +604,7 @@ elif menu == "Instructions":
             caption="Example of prediction results")
 
         st.markdown("""
-        **Note**: While the AI model is very accurate, it may occasionally misidentify breeds, especially with:
+        *Note*: While the AI model is very accurate, it may occasionally misidentify breeds, especially with:
         - Mixed breed dogs
         - Unusual color variations
         - Puppies (which may not yet have all adult features)
@@ -621,12 +621,12 @@ elif menu == "About":
     This application uses a deep learning model (EfficientNet-B3) trained on a dataset of 120 different dog breeds to identify dogs in images.
 
     ### Technology Stack:
-    - **Frontend**: Streamlit
-    - **AI Model**: EfficientNet-B3 (PyTorch)
-    - **Dataset**: Stanford Dogs Dataset (120 breeds)
+    - *Frontend*: Streamlit
+    - *AI Model*: EfficientNet-B3 (PyTorch)
+    - *Dataset*: Stanford Dogs Dataset (120 breeds)
 
     ### Model Performance:
-    - **Accuracy**: ~94% on test set
+    - *Accuracy*: ~94% on test set
 
     ### Privacy Notice:
     Images uploaded to this application are processed locally and are not stored permanently. 
@@ -642,7 +642,7 @@ st.markdown("---")
 st.markdown(
     """
     <div style='text-align: center;'>
-        <p>Dog Breed Identifier v1.0 | Built with ❤️ using Streamlit and PyTorch</p>
+        <p>Dog Breed Identifier v1.0 | Built with ❤ using Streamlit and PyTorch</p>
     </div>
     """,
     unsafe_allow_html=True
